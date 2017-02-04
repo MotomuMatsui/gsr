@@ -1,0 +1,21 @@
+Package: gs
+Version: 1.0.0
+Date: 2017-02-10
+Title: Graph Splitting Method in R
+Authors@R: c(
+  person("Motomu", "Matsui", email="qm@bs.s.u-tokyo.ac.jp", role=c("aut", "cre")),
+  person("Wataru", "Iwasaki", email="iwasaki@bs.s.u-tokyo.ac.jp", role="aut"))
+Depends:
+    R (>= 3.2.0)
+Imports:
+    evd (>= 2.3)
+SystemRequirements: perl (>= 5.10.0)
+Description: Graph Splitting Method in R:
+    Phylogenetic inference using a graph-based phylogenetic method.
+    See the website for more information.
+LazyData: TRUE
+License: GPL-3
+URL: https://github.com/MotomuMatsui/gs
+BugReports: https://github.com/MotomuMatsui/gs/issues
+Type: Package
+RoxygenNote: 5.0.1
