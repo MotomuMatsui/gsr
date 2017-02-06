@@ -8,16 +8,18 @@ open IN,  "<", $in;
 open OUT, ">", $out;
 
 my %blast;
-my $max;
+my %entry;
 while(<IN>){
     my ($x, $y, $evalue, $bit) = (split /\t/)[0,1,10,11];
 
     $blast{$x}{$y} = ($blast{$x}{$y} >= $bit)? $blast{$x}{$y}: $bit;
 
-    $max = (sort{$b <=> $a}($max, $x, $y))[0];
+    $entry{$x} = 1;
+    $entry{$y} = 1;
 }
 
-my @entry = 1..$max;
+my @entry = sort{$a <=> $b}keys %entry;
+my $last  = $entry[-1];
 
 for my $x(@entry){
     for my $y(@entry){
@@ -33,6 +35,6 @@ for my $x(@entry){
 	           ($self > 0)? $cmp/$self: 0;
 
         printf OUT "%.5f", $ans;
-	printf OUT ($y==$max)? "\n": " ";
+	printf OUT ($y==$last)? "\n": " ";
     }
 }

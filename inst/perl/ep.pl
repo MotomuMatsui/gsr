@@ -16,6 +16,7 @@ my(
 # Reading GS Tree (newick format)
 open GS, $nwk;
 my $gs_nwk; {
+    local $/ = "";
     $gs_nwk = <GS>;
     chomp $gs_nwk;
     $gs_nwk =~ s/\:[^\,\)\;]+//g;

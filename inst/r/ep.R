@@ -4,8 +4,8 @@ options(warn=-1)
 
 args <- commandArgs(trailingOnly = T)
 
-infile  <- args[1] # distance matrix
-outfile <- args[2] # step-wise partition
+infile  <- args[1] # Sequence similarity graph
+outfile <- args[2] # GS tree
 
 x <- read.table(infile)
 W <- as.matrix(x)
@@ -35,4 +35,3 @@ P   <- r*topo
 ans <- gs::ssc(P)
 
 write(t(ans), file=outfile, ncolumns=ncol(W))
-
