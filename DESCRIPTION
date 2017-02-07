@@ -19,3 +19,4 @@ URL: https://github.com/MotomuMatsui/gs
 BugReports: https://github.com/MotomuMatsui/gs/issues
 Type: Package
 RoxygenNote: 5.0.1
+Suggests: testthat

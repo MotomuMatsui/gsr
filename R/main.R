@@ -24,7 +24,16 @@ gs <- function(infile, type="fst", opn=11, ext=1, mtx="BLOSUM62", dup=0, ...){
 ##[Perl programs]
   package.dir <- find.package('gs')
   perl.dir    <- file.path(package.dir, 'perl')
-  r.dir       <- file.path(package.dir, 'r')
+  r.dir       <- file.path(package.dir, 'r2')
+
+  if(!file.exists(perl.dir)){
+    perl.dir  <- file.path(package.dir, 'inst/perl')
+  }
+
+  if(!file.exists(r.dir)){
+    r.dir     <- file.path(package.dir, 'inst/r2')
+  }
+
   fst2sim     <- file.path(perl.dir,    'fst2simple.pl')
   bl2mat      <- file.path(perl.dir,    'bl2mat.pl')
   sc2nwk      <- file.path(perl.dir,    'sc2nwk.pl')
@@ -47,6 +56,7 @@ gs <- function(infile, type="fst", opn=11, ext=1, mtx="BLOSUM62", dup=0, ...){
 
 ##[File type]
   if(type=="fst"){ # Multiple fasta file
+    perl   <- Sys.which("perl")
     mkbldb <- Sys.which("makeblastdb")
     blast  <- Sys.which("blastp")
 
@@ -56,7 +66,7 @@ gs <- function(infile, type="fst", opn=11, ext=1, mtx="BLOSUM62", dup=0, ...){
 
     #[All-to-All BLAST]
     cmd1 <- paste(perl, fst2sim, infile, fst, ann)
-    cmd2 <- paste(mkbldb, "-in", fst, "-dbtype prot -hash_index")
+    cmd2 <- paste(mkbldb, "-in", fst, "-dbtype prot -hash_index > /dev/null")
     cmd3 <- paste(blast, "-query", fst, "-db", fst, "-out", blo, option)
     cmd4 <- paste(perl, bl2mat, blo, ssg)
 
@@ -93,4 +103,6 @@ gs <- function(infile, type="fst", opn=11, ext=1, mtx="BLOSUM62", dup=0, ...){
        	  	ssg, scl, nwk, ept, epn, 
 		ep, sc2nwk_ep, dup)
   try(system(cmd6))
+
+  cat(scan(epn, sep="", what="", quiet = TRUE))
 }
